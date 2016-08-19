@@ -9,6 +9,18 @@
    Note: not matching LoRa example devices
 */
 
+/*
+
+   PIN definitions:
+   Bluetooth
+   PIN_RD6 38
+   LoRa:
+   PIN_RD13        36
+
+
+*/
+
+
 const int BOARD_TEMPERATURE  = 1;
 const int BOARD_LIGHT_SENSOR = 2;
 const int AIR_QUALITY_CLICK  = 3;
@@ -55,9 +67,24 @@ void setup() {
 
   Serial.begin(115200);
   delay(1000);
-
+  Serial.println("setup: s to start");
+  while (1)
+  {
+    if (Serial.available() > 0)
+    {
+      char cc = Serial.read();
+      if (cc == 'h' || cc == '?') {
+        Serial.println("Press 's' to start.");
+      }
+      if (cc == 's') {
+        break;
+      }
+    }
+  }
+  Serial.println("start");
   // Only needs to be done once to configure it really.
   initBLE();
+  Serial.println("Setup: Completed");
 
 }
 
@@ -74,6 +101,7 @@ void loop() {
   digitalWrite(PIN_RG14, HIGH);
 
   if (digitalRead(PIN_RD7) != i0) {
+    Serial.println("PIN_RD7) != i0");
     i0 = digitalRead(PIN_RD7);
     if (i0 == LOW) {
       if (ble) {
@@ -165,7 +193,7 @@ void loop() {
 
   digitalWrite(PIN_RG14, LOW);
 
-  LowPower.snooze(2000);
+  //LowPower.snooze(2000);
 }
 
 
@@ -227,22 +255,22 @@ float getTemperature() {
 void initBLE() {
   enableBLE();
   delay(110);
-  Serial1.print("$$$");
+  Serial1.print("+\n");
   delay(110);
   report(Serial1);
-  Serial1.print("SF, 1\r");
+  Serial1.print("SF, 1\n");
   delay(1000);
   report(Serial1);
   Serial1.print("$$$");
   delay(100);
   report(Serial1);
-  Serial1.print("S -, LoRa Shield\r");
+  Serial1.print("S -, LoRa Shield\n");
   delay(10);
   report(Serial1);
-  Serial1.print("R, 1\r");
+  Serial1.print("R, 1\n");
   delay(1000);
   report(Serial1);
-  disableBLE();
+  //disableBLE();
 }
 
 void enableLoRa() {
