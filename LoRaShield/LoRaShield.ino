@@ -264,12 +264,14 @@ void initBLE() {
   Serial1.print("$$$"); //get command prompt
   delay(500);
   report(Serial1);
-  Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
-  Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
+  //Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
+  //Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
+  Serial.println("SS,C0\r"); //set bluetooth name
+  Serial1.print("SS,C0\r"); //set bluetooth name
   delay(500);
   report(Serial1);
-  Serial.println("S-,Darryl\r"); //set bluetooth name
-  Serial1.print("S-,Darryl\r"); //set bluetooth name
+  Serial.println("S-,LoRa\r"); //set bluetooth name
+  Serial1.print("S-,LoRa\r"); //set bluetooth name
   delay(500);
   report(Serial1);
   Serial.println("R,1\r");
@@ -282,12 +284,12 @@ void initBLE() {
   delay(500);
   report(Serial1);
   delay(500);
-  Serial.print("$$$"); //get command prompt
+  Serial.println("$$$"); //get command prompt
   Serial1.print("$$$"); //get command prompt
   delay(500);
   report(Serial1);
-  Serial.println("GN\r"); //Get Name
-  Serial1.print("GN\r"); //Get Name
+  Serial.println("D\r"); //Get Name
+  Serial1.print("D\r"); //Get Name
   delay(500);
   report(Serial1);
   Serial.println("A\r"); //Advertise
