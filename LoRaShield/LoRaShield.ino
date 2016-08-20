@@ -20,7 +20,6 @@
 
 */
 
-
 const int BOARD_TEMPERATURE  = 1;
 const int BOARD_LIGHT_SENSOR = 2;
 const int AIR_QUALITY_CLICK  = 3;
@@ -255,20 +254,46 @@ float getTemperature() {
 void initBLE() {
   enableBLE();
   delay(110);
-  Serial1.print("+\n");
+  Serial1.print("$$$"); //get command prompt
   delay(110);
   report(Serial1);
-  Serial1.print("SF, 1\n");
+  Serial.println("SF,1\r"); //factory reset
+  Serial1.print("SF,1\r"); //factory reset
   delay(1000);
   report(Serial1);
-  Serial1.print("$$$");
-  delay(100);
+  Serial1.print("$$$"); //get command prompt
+  delay(500);
   report(Serial1);
-  Serial1.print("S -, LoRa Shield\n");
-  delay(10);
+  Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
+  Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
+  delay(500);
   report(Serial1);
-  Serial1.print("R, 1\n");
-  delay(1000);
+  Serial.println("S-,Darryl\r"); //set bluetooth name
+  Serial1.print("S-,Darryl\r"); //set bluetooth name
+  delay(500);
+  report(Serial1);
+  Serial.println("R,1\r");
+  Serial1.print("R,1\r");
+  report(Serial1);
+  delay(500);
+  report(Serial1);
+  delay(500);
+  report(Serial1);
+  delay(500);
+  report(Serial1);
+  delay(500);
+  Serial.print("$$$"); //get command prompt
+  Serial1.print("$$$"); //get command prompt
+  delay(500);
+  report(Serial1);
+  Serial.println("GN\r"); //Get Name
+  Serial1.print("GN\r"); //Get Name
+  delay(500);
+  report(Serial1);
+  Serial.println("A\r"); //Advertise
+  Serial1.print("A\r");
+  delay(500);
+
   report(Serial1);
   //disableBLE();
 }
