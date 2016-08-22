@@ -264,14 +264,18 @@ void initBLE() {
   Serial1.print("$$$"); //get command prompt
   delay(500);
   report(Serial1);
-  //Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
-  //Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
-  Serial.println("SS,C0\r"); //set bluetooth name
-  Serial1.print("SS,C0\r"); //set bluetooth name
+  Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
+  Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
+  //Serial.println("SS,C0\r"); 
+  //Serial1.print("SS,C0\r"); 
   delay(500);
   report(Serial1);
   Serial.println("S-,LoRa\r"); //set bluetooth name
   Serial1.print("S-,LoRa\r"); //set bluetooth name
+  delay(500);
+  report(Serial1);
+  Serial.println("D\r"); //Dump
+  Serial1.print("D\r"); //Dump
   delay(500);
   report(Serial1);
   Serial.println("R,1\r");
@@ -284,7 +288,7 @@ void initBLE() {
   delay(500);
   report(Serial1);
   delay(500);
-  Serial.println("$$$"); //get command prompt
+  /* Serial.println("$$$"); //get command prompt
   Serial1.print("$$$"); //get command prompt
   delay(500);
   report(Serial1);
@@ -292,10 +296,11 @@ void initBLE() {
   Serial1.print("D\r"); //Get Name
   delay(500);
   report(Serial1);
+ 
   Serial.println("A\r"); //Advertise
   Serial1.print("A\r");
   delay(500);
-
+ */
   report(Serial1);
   //disableBLE();
 }
