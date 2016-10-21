@@ -2,7 +2,7 @@
 #include <DSPI.h>
 #include <Icon8.h>
 #include <Wire.h>
-#include <LowPower.h>
+//#include <LowPower.h>
 
 /*
    Device definitions from DataStation Code
@@ -10,14 +10,11 @@
 */
 
 /*
-
    PIN definitions:
    Bluetooth
    PIN_RD6 38
    LoRa:
    PIN_RD13        36
-
-
 */
 
 const int BOARD_TEMPERATURE  = 1;
@@ -171,22 +168,22 @@ void loop() {
     case 0:
       oled.println("Battery:");
       oled.printf("%4.2fV", getBatteryVoltage());
-      Serial1.printf("0:%4.2fV", getBatteryVoltage());
+      Serial1.printf("0:%4.2fV\n", getBatteryVoltage());
       break;
     case 1:
       oled.println("Temperature:");
       oled.printf("%5.2fC", getTemperature());
-      Serial1.printf("1:% 5.2fC", getTemperature());
+      Serial1.printf("1:%5.2fC\n", getTemperature());
       break;
     case 2:
       oled.println("Light: ");
-      oled.printf(" % d lux", getLightLevel());
-      Serial1.printf("2: % d lux", getLightLevel());
+      oled.printf(" %d lux", getLightLevel());
+      Serial1.printf("2: %d lux\n", getLightLevel());
       break;
     case 3:
       oled.println("IR: ");
-      oled.printf(" % d lux", getIRLightLevel());
-      Serial1.printf("3: % d lux", getIRLightLevel());
+      oled.printf(" %d lux", getIRLightLevel());
+      Serial1.printf("3: %d lux\n", getIRLightLevel());
       break;
   }
 
@@ -195,7 +192,7 @@ void loop() {
 
   digitalWrite(PIN_RG14, LOW);
 
-  LowPower.snooze(2000);
+  //LowPower.snooze(2000);
 }
 
 
@@ -283,7 +280,6 @@ void initBLE() {
 /*
   Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
   Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
-
   delay(500);
   report(Serial1);
 */
@@ -340,3 +336,4 @@ void disableBLE() {
 void report(Stream &d) {
   while (d.available()) Serial.write(d.read());
 }
+
