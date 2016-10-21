@@ -66,6 +66,7 @@ void setup() {
 
   Serial.begin(115200);
   delay(1000);
+  /*
   Serial.println("setup: s to start");
   while (1)
   {
@@ -80,7 +81,9 @@ void setup() {
       }
     }
   }
+  
   Serial.println("start");
+  */
   // Only needs to be done once to configure it really.
   initBLE();
   Serial.println("Setup: Completed");
@@ -192,7 +195,7 @@ void loop() {
 
   digitalWrite(PIN_RG14, LOW);
 
-  //LowPower.snooze(2000);
+  LowPower.snooze(2000);
 }
 
 
@@ -257,51 +260,56 @@ void initBLE() {
   Serial1.print("$$$"); //get command prompt
   delay(110);
   report(Serial1);
-  Serial.println("SF,1\r"); //factory reset
-  Serial1.print("SF,1\r"); //factory reset
-  delay(1000);
-  report(Serial1);
-  Serial1.print("$$$"); //get command prompt
-  delay(500);
-  report(Serial1);
-  Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
-  Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
-  //Serial.println("SS,C0\r"); 
-  //Serial1.print("SS,C0\r"); 
-  delay(500);
-  report(Serial1);
-  Serial.println("S-,LoRa\r"); //set bluetooth name
-  Serial1.print("S-,LoRa\r"); //set bluetooth name
-  delay(500);
-  report(Serial1);
+  /*
   Serial.println("D\r"); //Dump
   Serial1.print("D\r"); //Dump
   delay(500);
   report(Serial1);
+*/
+
+  Serial.println("SF,1\r"); //factory reset
+  Serial1.print("SF,1\r"); //factory reset
+  delay(1000);
+  report(Serial1);
+
+  Serial1.print("$$$"); //get command prompt
+  delay(500);
+  report(Serial1);
+
+  Serial.println("SS,C0\r");
+  Serial1.print("SS,C0\r");
+  delay(500);
+  report(Serial1);
+/*
+  Serial.println("SN,DNLoRaShield\r"); //set bluetooth name
+  Serial1.print("SN,DNLoRaShield\r"); //set bluetooth name
+
+  delay(500);
+  report(Serial1);
+*/
+
+  Serial.println("S-,LoRa\r"); //set bluetooth name
+  Serial1.print("S-,LoRa\r"); //set bluetooth name
+  delay(500);
+  report(Serial1);
+
+
+  Serial.println("SR,00A0\r"); //A0 0x2000 + 0x8000
+  Serial1.print("SR,00A0\r"); //A0 0x2000 + 0x8000
+  delay(500);
+  report(Serial1);
+/*
+  Serial.println("D\r"); //Dump
+  Serial1.print("D\r"); //Dump
+  delay(500);
+  report(Serial1);
+*/
+
   Serial.println("R,1\r");
   Serial1.print("R,1\r");
   report(Serial1);
   delay(500);
-  report(Serial1);
-  delay(500);
-  report(Serial1);
-  delay(500);
-  report(Serial1);
-  delay(500);
-  /* Serial.println("$$$"); //get command prompt
-  Serial1.print("$$$"); //get command prompt
-  delay(500);
-  report(Serial1);
-  Serial.println("D\r"); //Get Name
-  Serial1.print("D\r"); //Get Name
-  delay(500);
-  report(Serial1);
- 
-  Serial.println("A\r"); //Advertise
-  Serial1.print("A\r");
-  delay(500);
- */
-  report(Serial1);
+
   //disableBLE();
 }
 
@@ -332,4 +340,3 @@ void disableBLE() {
 void report(Stream &d) {
   while (d.available()) Serial.write(d.read());
 }
-
